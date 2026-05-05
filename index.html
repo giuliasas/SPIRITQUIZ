@@ -27,6 +27,7 @@ h1 {
 .progress {
   font-weight: bold;
   margin-bottom: 15px;
+  font-size: 18px;
 }
 
 .question {
@@ -70,8 +71,9 @@ h1 {
 
 .letter {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   color: #c98b2c;
+  margin-bottom: 8px;
 }
 
 .nav {
@@ -95,6 +97,13 @@ button:hover {
 
 button:disabled {
   background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .answers {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 </head>
@@ -103,9 +112,9 @@ button:disabled {
 
 <div class="container">
   <h1>Avventura con Spirit 🐎</h1>
+  <h1>QUIZ SUL CAVALLO 🐴</h1>
 
   <div class="progress" id="progress"></div>
-
   <div class="question" id="question"></div>
   <div class="answers" id="answers"></div>
 
@@ -139,11 +148,67 @@ const quiz = [
       { img: "si.png", label: "SÌ" },
       { img: "no.png", label: "NO" }
     ]
+  },
+  {
+    q: "Se non ti conosce può provare...",
+    a: [
+      { img: "paura.png", label: "PAURA" },
+      { img: "fiducia.png", label: "FIDUCIA" },
+      { img: "fame.png", label: "FAME" }
+    ]
+  },
+  {
+    q: "Come ci avviciniamo al cavallo?",
+    a: [
+      { img: "avvicinarsi.png", label: "CON CALMA" },
+      { img: "correre.png", label: "CORRENDO" },
+      { img: "dietro.png", label: "DA DIETRO" }
+    ]
+  },
+  {
+    q: "Le andature del cavallo sono:",
+    a: [
+      { img: "passo.png", label: "PASSO, TROTTO, GALOPPO" },
+      { img: "medio.png", label: "MEDIO, TROTTO, LIBERO" },
+      { img: "veloce.png", label: "GALOPPO, VELOCE, ALLUNGATO" }
+    ]
+  },
+  {
+    q: "Qual è l'andatura più veloce?",
+    a: [
+      { img: "passo.png", label: "PASSO" },
+      { img: "trotto.png", label: "TROTTO" },
+      { img: "galoppo.png", label: "GALOPPO" }
+    ]
+  },
+  {
+    q: "Dove vive meglio il cavallo?",
+    a: [
+      { img: "box.jpg", label: "BOX" },
+      { img: "paddock.jpg", label: "PADDOCK E PASCOLO" },
+      { img: "scuderia.jpg", label: "SCUDERIA" }
+    ]
+  },
+  {
+    q: "Dove è pericoloso stare vicino al cavallo?",
+    a: [
+      { img: "dietro.png", label: "DIETRO" },
+      { img: "davanti.png", label: "DAVANTI" },
+      { img: "fianco.png", label: "FIANCO" }
+    ]
+  },
+  {
+    q: "Cosa fa stare bene il cavallo?",
+    a: [
+      { img: "fame.png", label: "FAME" },
+      { img: "spazzola.png", label: "TOELETTATURA" },
+      { img: "box.jpg", label: "STARE NEL BOX" }
+    ]
   }
 ];
 
 let current = 0;
-const letters = ["A", "B", "C", "D"];
+const letters = ["A", "B", "C"];
 
 function loadQuestion() {
   const questionDiv = document.getElementById("question");
@@ -152,19 +217,17 @@ function loadQuestion() {
   const nextBtn = document.getElementById("nextBtn");
   const progress = document.getElementById("progress");
 
-  // 👉 NUMERO DOMANDA
-  progress.innerText = `Domanda ${current + 1} / ${quiz.length}`;
-
+  progress.innerText = "Domanda " + (current + 1) + " / " + quiz.length;
   questionDiv.innerText = quiz[current].q;
   answersDiv.innerHTML = "";
 
-  quiz[current].a.forEach((answer, index) => {
+  quiz[current].a.forEach(function(answer, index) {
     const card = document.createElement("div");
     card.className = "answer";
 
     card.innerHTML = `
       <div class="letter">${letters[index]})</div>
-      <img src="${answer.img}">
+      <img src="${answer.img}" alt="${answer.label}">
       <div class="label">${answer.label}</div>
     `;
 
@@ -183,7 +246,7 @@ function nextQuestion() {
   } else {
     document.querySelector(".container").innerHTML = `
       <h1>Hai finito! 🎉</h1>
-      <p>Bravo, hai completato il quiz 🐴</p>
+      <p class="question">Bravo, hai completato il quiz sul cavallo 🐴</p>
       <button onclick="location.reload()">Ricomincia</button>
     `;
   }
