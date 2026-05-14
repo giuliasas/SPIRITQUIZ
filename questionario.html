@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionario – Il viaggio di Babà</title>
+<style>
+body {
+  margin:0; font-family:Arial, sans-serif; background:#fff; color:#111;
+}
+main { max-width:1100px; margin:auto; padding:18px; }
+header {
+  border:3px solid #111; border-radius:14px; padding:18px; text-align:center;
+  background:#edf7e8; margin-bottom:18px;
+}
+h1 { margin:0; font-size:42px; text-transform:uppercase; }
+.subtitle { color:#2f6b20; font-weight:800; font-size:24px; text-transform:uppercase; }
+.instructions {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px;
+  border:2px solid #111; border-radius:12px; padding:12px; margin-bottom:18px;
+}
+.instructions div { background:#f7fbf4; padding:12px; text-align:center; font-weight:bold; border-radius:10px; }
+.question {
+  border:3px solid #111; border-radius:14px; overflow:hidden; margin:18px 0; page-break-inside:avoid;
+}
+.question h2 {
+  margin:0; padding:12px; background:#edf7e8; border-bottom:3px solid #111;
+  text-transform:uppercase; font-size:24px;
+}
+.question h2 b {
+  background:#6aa84f; color:#fff; border-radius:50%; padding:6px 12px; margin-right:8px;
+}
+.options { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); }
+.option {
+  min-height:165px; border-right:2px solid #777; border-bottom:2px solid #777;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px; padding:10px; text-align:center; font-weight:900; text-transform:uppercase;
+  cursor:pointer; position:relative;
+}
+.option:hover { background:#f6fff2; }
+.option input { position:absolute; top:8px; left:8px; width:26px; height:26px; accent-color:#6aa84f; }
+.option img { width:86px; height:86px; object-fit:contain; }
+.emoji { font-size:70px; line-height:1; }
+textarea { width:100%; min-height:120px; font-size:20px; padding:12px; border:3px solid #111; border-radius:10px; }
+.help { padding:12px; font-weight:bold; }
+.actions { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; }
+button { border:3px solid #111; border-radius:12px; padding:12px 18px; font-size:18px; font-weight:bold; cursor:pointer; }
+.primary { background:#6aa84f; color:white; }
+#risultati { display:none; border:3px solid #111; border-radius:12px; padding:14px; background:#f6fff2; white-space:pre-wrap; }
+.back-link {
+  display:inline-block; margin-bottom:14px; color:#2f6b20; font-weight:bold; text-decoration:none;
+}
+.back-link:hover { text-decoration:underline; }
+@media print {
+  .actions, #risultati, .back-link { display:none!important; }
+  main { max-width:none; padding:8px; }
+  .option { min-height:120px; }
+  .option img { width:62px; height:62px; }
+  h1 { font-size:28px; }
+  .subtitle { font-size:18px; }
+}
+</style>
+</head>
+<body>
+<main>
+<a href="index.html" class="back-link">← Torna al menu</a>
+<header>
+  <h1>🐴 Questionario – Il viaggio di Babà</h1>
+  <div class="subtitle">Come ho vissuto il progetto</div>
+</header>
+
+<section class="instructions">
+  <div>Guarda l’immagine</div>
+  <div>Leggi o ascolta</div>
+  <div>Scegli la risposta</div>
+  <div>Puoi chiedere aiuto</div>
+</section>
+
+<form id="form">
+<section class="question">
+  <h2><b>1</b> Come ti sei sentito/a?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q1" value="Felice"><img src="questionario_assets/felice.png" alt="Felice"><span>Felice</span></label>
+    <label class="option"><input type="radio" name="q1" value="Tranquillo/a"><img src="questionario_assets/tranquillo.png" alt="Tranquillo/a"><span>Tranquillo/a</span></label>
+    <label class="option"><input type="radio" name="q1" value="Stanco/a"><img src="questionario_assets/stanco.png" alt="Stanco/a"><span>Stanco/a</span></label>
+    <label class="option"><input type="radio" name="q1" value="In difficoltà"><img src="questionario_assets/difficile.png" alt="In difficoltà"><span>In difficoltà</span></label>
+    <label class="option"><input type="radio" name="q1" value="Parte del gruppo"><img src="questionario_assets/gruppo.png" alt="Parte del gruppo"><span>Parte del gruppo</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>2</b> Cosa ti è piaciuto di più?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q2" value="Maneggio"><span class="emoji">🐴</span><span>Maneggio</span></label>
+    <label class="option"><input type="radio" name="q2" value="Percorso motorio"><img src="questionario_assets/correre.png" alt="Percorso motorio"><span>Percorso motorio</span></label>
+    <label class="option"><input type="radio" name="q2" value="Cartellone"><img src="questionario_assets/disegnare.png" alt="Cartellone"><span>Cartellone</span></label>
+    <label class="option"><input type="radio" name="q2" value="Lavoro di gruppo"><img src="questionario_assets/gruppo.png" alt="Lavoro di gruppo"><span>Lavoro di gruppo</span></label>
+    <label class="option"><input type="radio" name="q2" value="Quiz a squadre"><img src="questionario_assets/quiz.png" alt="Quiz a squadre"><span>Quiz a squadre</span></label>
+    <label class="option"><input type="radio" name="q2" value="Giochi"><img src="questionario_assets/giocare.png" alt="Giochi"><span>Giochi</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>3</b> Cosa ti ha aiutato a capire?</h2>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q3" value="Immagini"><img src="questionario_assets/immagine.png" alt="Immagini"><span>Immagini</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Muovermi"><img src="questionario_assets/correre.png" alt="Muovermi"><span>Muovermi</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Lavorare in gruppo"><img src="questionario_assets/gruppo.png" alt="Lavorare in gruppo"><span>Lavorare in gruppo</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Ascoltare"><img src="questionario_assets/ascoltare.png" alt="Ascoltare"><span>Ascoltare</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Parlare"><img src="questionario_assets/parlare.png" alt="Parlare"><span>Parlare</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Giocare"><img src="questionario_assets/giocare.png" alt="Giocare"><span>Giocare</span></label>
+    <label class="option"><input type="checkbox" name="q3" value="Fare"><img src="questionario_assets/fare.png" alt="Fare"><span>Fare</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>4</b> Ti sei sentito/a parte del gruppo?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q4" value="Mai"><img src="questionario_assets/mai.png" alt="Mai"><span>Mai</span></label>
+    <label class="option"><input type="radio" name="q4" value="Qualche volta"><img src="questionario_assets/qualche.png" alt="Qualche volta"><span>Qualche volta</span></label>
+    <label class="option"><input type="radio" name="q4" value="Spesso"><img src="questionario_assets/spesso.png" alt="Spesso"><span>Spesso</span></label>
+    <label class="option"><input type="radio" name="q4" value="Sempre"><img src="questionario_assets/sempre.png" alt="Sempre"><span>Sempre</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>5</b> Hai aiutato qualcuno?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q5" value="Sì"><img src="questionario_assets/aiutare.png" alt="Sì"><span>Sì</span></label>
+    <label class="option"><input type="radio" name="q5" value="Un po’"><img src="questionario_assets/poco.png" alt="Un po’"><span>Un po’</span></label>
+    <label class="option"><input type="radio" name="q5" value="No"><img src="questionario_assets/no.png" alt="No"><span>No</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>6</b> Qualcuno ha aiutato te?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q6" value="Sì"><img src="questionario_assets/aiutare.png" alt="Sì"><span>Sì</span></label>
+    <label class="option"><input type="radio" name="q6" value="Un po’"><img src="questionario_assets/poco.png" alt="Un po’"><span>Un po’</span></label>
+    <label class="option"><input type="radio" name="q6" value="No"><img src="questionario_assets/no.png" alt="No"><span>No</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>7</b> Cosa ti ha aiutato a stare meglio?</h2>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q7" value="Agenda visiva"><img src="questionario_assets/immagine.png" alt="Agenda visiva"><span>Agenda visiva</span></label>
+    <label class="option"><input type="checkbox" name="q7" value="Fare pausa"><img src="questionario_assets/pausa.png" alt="Fare pausa"><span>Fare pausa</span></label>
+    <label class="option"><input type="checkbox" name="q7" value="Insegnante"><img src="questionario_assets/insegnante.png" alt="Insegnante"><span>Insegnante</span></label>
+    <label class="option"><input type="checkbox" name="q7" value="Compagni"><img src="questionario_assets/gruppo.png" alt="Compagni"><span>Compagni</span></label>
+    <label class="option"><input type="checkbox" name="q7" value="Immagini"><img src="questionario_assets/immagine.png" alt="Immagini"><span>Immagini</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>8</b> Come ti piace imparare?</h2>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q8" value="Muovermi"><img src="questionario_assets/correre.png" alt="Muovermi"><span>Muovermi</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Immagini"><img src="questionario_assets/immagine.png" alt="Immagini"><span>Immagini</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Fare"><img src="questionario_assets/fare.png" alt="Fare"><span>Fare</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Parlare"><img src="questionario_assets/parlare.png" alt="Parlare"><span>Parlare</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Guardare"><img src="questionario_assets/guardare.png" alt="Guardare"><span>Guardare</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Gruppo"><img src="questionario_assets/gruppo.png" alt="Gruppo"><span>Gruppo</span></label>
+    <label class="option"><input type="checkbox" name="q8" value="Giocare"><img src="questionario_assets/giocare.png" alt="Giocare"><span>Giocare</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>9</b> C’è qualcosa che vorresti rifare?</h2>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q9" value="Maneggio"><span class="emoji">🐴</span><span>Maneggio</span></label>
+    <label class="option"><input type="checkbox" name="q9" value="Percorso motorio"><img src="questionario_assets/correre.png" alt="Percorso motorio"><span>Percorso motorio</span></label>
+    <label class="option"><input type="checkbox" name="q9" value="Lavoro di gruppo"><img src="questionario_assets/gruppo.png" alt="Lavoro di gruppo"><span>Lavoro di gruppo</span></label>
+    <label class="option"><input type="checkbox" name="q9" value="Immagini"><img src="questionario_assets/immagine.png" alt="Immagini"><span>Immagini</span></label>
+    <label class="option"><input type="checkbox" name="q9" value="Giochi"><img src="questionario_assets/giocare.png" alt="Giochi"><span>Giochi</span></label>
+    <label class="option"><input type="checkbox" name="q9" value="Quiz"><img src="questionario_assets/quiz.png" alt="Quiz"><span>Quiz</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>10</b> Cosa possiamo migliorare?</h2>
+  <div class="options">
+    <label class="option"><input type="checkbox" name="q10" value="Spiegazioni"><img src="questionario_assets/parlare.png" alt="Spiegazioni"><span>Spiegazioni</span></label>
+    <label class="option"><input type="checkbox" name="q10" value="Immagini"><img src="questionario_assets/immagine.png" alt="Immagini"><span>Immagini</span></label>
+    <label class="option"><input type="checkbox" name="q10" value="Tempi"><img src="questionario_assets/tempo.png" alt="Tempi"><span>Tempi</span></label>
+    <label class="option"><input type="checkbox" name="q10" value="Gruppo"><img src="questionario_assets/gruppo.png" alt="Gruppo"><span>Gruppo</span></label>
+    <label class="option"><input type="checkbox" name="q10" value="Attività"><img src="questionario_assets/fare.png" alt="Attività"><span>Attività</span></label>
+    <label class="option"><input type="checkbox" name="q10" value="Tutto bene così"><img src="questionario_assets/spesso.png" alt="Tutto bene così"><span>Tutto bene così</span></label>
+  </div>
+</section>
+
+<section class="question">
+  <h2><b>11</b> Cosa hai scoperto di te?</h2>
+  <p class="help">Puoi scrivere, parlare o rispondere con l’aiuto dell’insegnante.</p>
+  <textarea name="q11" placeholder="Ho scoperto che..."></textarea>
+</section>
+
+<div class="actions">
+  <button type="button" class="primary" onclick="mostraRisposte()">Mostra risposte</button>
+  <button type="button" onclick="window.print()">Stampa scheda</button>
+  <button type="reset">Cancella</button>
+</div>
+<pre id="risultati"></pre>
+</form>
+</main>
+
+<script>
+const labels = {
+  q1:"Come ti sei sentito/a", q2:"Cosa ti è piaciuto di più", q3:"Cosa ti ha aiutato a capire",
+  q4:"Ti sei sentito/a parte del gruppo", q5:"Hai aiutato qualcuno", q6:"Qualcuno ha aiutato te",
+  q7:"Cosa ti ha aiutato a stare meglio", q8:"Come ti piace imparare",
+  q9:"Cosa vorresti rifare", q10:"Cosa possiamo migliorare", q11:"Cosa hai scoperto di te"
+};
+function values(name) {
+  return Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).map(x => x.value).join(", ");
+}
+function mostraRisposte() {
+  const form = document.getElementById("form");
+  const fd = new FormData(form);
+  let txt = "";
+  for (const k of Object.keys(labels)) {
+    let v = values(k) || fd.get(k) || "—";
+    txt += labels[k] + ": " + v + "\n";
+  }
+  const out = document.getElementById("risultati");
+  out.textContent = txt;
+  out.style.display = "block";
+  out.scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
