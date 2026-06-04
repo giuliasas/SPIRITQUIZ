@@ -196,7 +196,8 @@ button { border:3px solid #111; border-radius:12px; padding:12px 18px; font-size
 </section>
 
 <div class="actions">
-  <button type="button" class="primary" onclick="mostraRisposte()">Mostra risposte</button>
+  <button type="button" class="primary" onclick="inviaRisposte()">Invia e salva le mie risposte</button>
+  <button type="button" onclick="mostraRisposte()">Mostra risposte</button>
   <button type="button" onclick="window.print()">Stampa scheda</button>
   <button type="reset">Cancella</button>
 </div>
@@ -224,6 +225,52 @@ function mostraRisposte() {
   }
   const out = document.getElementById("risultati");
   out.textContent = txt;
+  out.style.display = "block";
+  out.scrollIntoView({behavior:"smooth"});
+}
+
+// --- Salvataggio risposte -------------------------------------------------
+const BACKEND = "https://biagiodistefano.io/sorella/submit/";
+
+function raccogliRisposte() {
+  const form = document.getElementById("form");
+  const fd = new FormData(form);
+  const answers = {};
+  for (const k of Object.keys(labels)) {
+    answers[k] = values(k) || fd.get(k) || "";
+  }
+  return answers;
+}
+
+function scaricaFile(answers) {
+  let txt = "Questionario – Il viaggio di Babà\n\n";
+  for (const k of Object.keys(labels)) {
+    txt += labels[k] + ": " + (answers[k] || "—") + "\n";
+  }
+  const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "le-mie-risposte-baba.txt";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+async function inviaRisposte() {
+  const answers = raccogliRisposte();
+  // 1) Lo studente riceve sempre il proprio file, anche offline.
+  scaricaFile(answers);
+  // 2) Best-effort: invia una copia anonima per la panoramica.
+  const out = document.getElementById("risultati");
+  try {
+    await fetch(BACKEND, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({quiz: "babah", answers, labels})
+    });
+    out.textContent = "✅ Risposte inviate e file scaricato. Grazie!";
+  } catch (e) {
+    out.textContent = "✅ File scaricato. (Invio online non riuscito, ma il file è salvato sul dispositivo.)";
+  }
   out.style.display = "block";
   out.scrollIntoView({behavior:"smooth"});
 }
